@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block title %}CC - A1 - Task2{% endblock %}
+{% block content %}
+
+    <div>
+        <h1>Datastore and Firebase Auth Example</h1>
+
+        <h2>Last 10 visits</h2>
+        {% for time in times %}
+            <p>{{ time }}</p>
+        {% endfor %}
+    </div>
+{% endblock %}
