@@ -17,20 +17,26 @@
 import datetime
 
 from flask import Flask, render_template
+from google.cloud import bigquery
+
+import os
+os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "/Users/ariannajafiyamchelo/Desktop/cc-a1-task2-362308-054849c295bb.json"
 
 app = Flask(__name__)
 
 
 @app.route('/')
 def root():
-    # For the sake of example, use static information to inflate the template.
-    # This will be replaced with real information in later steps.
-    dummy_times = [datetime.datetime(2018, 1, 1, 10, 0, 0),
-                   datetime.datetime(2018, 1, 2, 10, 30, 0),
-                   datetime.datetime(2018, 1, 3, 11, 0, 0),
-                   ]
 
-    return render_template('index.html', times=dummy_times)
+    client = bigquery.Client()
+
+    query = """
+        SELECT * FROM cc-a1-task2-362308.task2_dataset.country_classification LIMIT 10
+    """
+
+    query_job = client.query(query)
+
+    return render_template('index.html', result=query_job)
 
 
 if __name__ == '__main__':
