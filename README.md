@@ -8,4 +8,4 @@ For more information visit [Academic Integrity at RMIT](https://www.rmit.edu.au/
 
 https://www.codegrepper.com/code-examples/python/Please+set+GOOGLE_APPLICATION_CREDENTIALS+or+explicitly+create+credentials+and+re-run+the+application
 
-rr
+https://cloud.google.com/bigquery/docs/reference/libraries#linux-or-macos
