@@ -84,6 +84,19 @@ def root():
 
     return render_template('index.html', rows=query_job)
 
+# Code sourced and adapted from:
+
+# [8] A. Diwan, "Perform SUM and SUBTRACTION on the basis of a condition in a single MySQL query?",
+# Tutorialspoint.com, 2022. [Online]. Available:
+# https://www.tutorialspoint.com/perform-sum-and-subtraction-on-the-basis-of-a-condition-in-a-single-mysql-query. [
+# Accessed: 14- Sep- 2022].
+
+# [9] "Mathematical functions  |  BigQuery  |  Google Cloud", Google Cloud, 2022. [Online]. Available:
+# https://cloud.google.com/bigquery/docs/reference/standard-sql/mathematical_functions. [Accessed: 14- Sep- 2022].
+
+# [10] Jacobm001 and Z. Abideen, "How to Perform Subtraction in SQL query based on some conditions?", Stack Overflow,
+# 2022. [Online]. Available: https://stackoverflow.com/questions/46996265/how-to-perform-subtraction-in-sql-query
+# -based-on-some-conditions. [Accessed: 14- Sep- 2022].
 
 @app.route('/task22')
 def task22():
