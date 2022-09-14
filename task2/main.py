@@ -26,6 +26,7 @@ from google.cloud import bigquery
 # -credentials-with-gcloud-on-a-server. [Accessed: 14- Sep- 2022].
 
 import os
+
 os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "/Users/ariannajafiyamchelo/Desktop/cc-a1-task2-362308-054849c295bb.json"
 
 app = Flask(__name__)
@@ -57,41 +58,78 @@ def root():
     client = bigquery.Client()
 
     query = """
-    SELECT
-  time_ref,
-  MAX(trade_value) AS trade_value
-FROM (
-  SELECT
-    time_ref,
-    SUM(value) AS `trade_value`
-  FROM
-    `cc-a1-task2-362308.task2_dataset.gsquarterlySeptember20`
-  WHERE
-    account = "Exports"
-    OR account = "Imports"
-  GROUP BY
-    time_ref)
-GROUP BY
-  time_ref
-ORDER BY
-  trade_value DESC
-LIMIT
-  10
+            SELECT
+          time_ref,
+          MAX(trade_value) AS trade_value
+        FROM (
+          SELECT
+            time_ref,
+            SUM(value) AS `trade_value`
+          FROM
+            `cc-a1-task2-362308.task2_dataset.gsquarterlySeptember20`
+          WHERE
+            account = "Exports"
+            OR account = "Imports"
+          GROUP BY
+            time_ref)
+        GROUP BY
+          time_ref
+        ORDER BY
+          trade_value DESC
+        LIMIT
+          10
     """
 
     query_job = client.query(query)
 
-    return render_template('index.html', rows=query_job, i=0)
+    return render_template('index.html', rows=query_job)
 
 
 @app.route('/task22')
 def task22():
-    return render_template('task22.html')
+    client = bigquery.Client()
+    query = """
+            SELECT
+          country_label,
+          product_type,
+          SUM(CASE
+              WHEN account = 'Imports' THEN value
+              WHEN account = 'Exports' THEN -value
+          END
+            ) AS trade_deficit_value,
+          status
+        FROM
+          `task2_dataset.country_classification` co
+        INNER JOIN
+          `task2_dataset.gsquarterlySeptember20` gs
+        ON
+          co.country_code = gs.country_code
+        WHERE
+          product_type = "Goods"
+          AND time_ref >= 201400
+          AND time_ref <= 201600
+          AND status = "F"
+        GROUP BY
+          country_label,
+          product_type,
+          status
+        ORDER BY
+          trade_deficit_value DESC
+        LIMIT
+          50
+    """
+    query_job = client.query(query)
+    return render_template('task22.html', rows=query_job)
 
 
 @app.route('/task23')
 def task23():
-    return render_template('task23.html')
+    client = bigquery.Client()
+    query = """
+
+    """
+    query_job = client.query(query)
+    return render_template('task23.html', rows=query_job)
 
 
 if __name__ == '__main__':

@@ -6,7 +6,8 @@
         <div class="p-xl-5">
             <h1>Task 2 - 2</h1>
             <p>
-                <small class="text-muted"></small>
+                <small class="text-muted">Top 50 countries with the highest total trade deficit value of goods from 2014
+                    to 2016 with “F” status</small>
             </p>
         </div>
 
@@ -15,17 +16,21 @@
                 <table class="table">
                     <thead class="text-muted">
                     <tr>
-                        <th scope="col"></th>
-                        <th scope="col"></th>
+                        <th scope="col">Country Label</th>
+                        <th scope="col">Product Type</th>
+                        <th scope="col">Trade Deficit Value</th>
+                        <th scope="col">Status</th>
                     </tr>
                     </thead>
                     <tbody class="align-baseline">
 
+                    {% for row in rows %}
                         <tr>
-
-                                <td></td>
-
+                            {% for column in row %}
+                                <td>{{ column }}</td>
+                            {% endfor %}
                         </tr>
+                    {% endfor %}
 
                     </tbody>
                 </table>
