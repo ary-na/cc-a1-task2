@@ -19,24 +19,79 @@ import datetime
 from flask import Flask, render_template
 from google.cloud import bigquery
 
+# Code sourced and adapted from:
+
+# [2] cherba, S. Ramey, D. Duck and peterh, "How to use GOOGLE_APPLICATION_CREDENTIALS with gcloud on a server?",
+# Server Fault, 2022. [Online]. Available: https://serverfault.com/questions/848580/how-to-use-google-application
+# -credentials-with-gcloud-on-a-server. [Accessed: 14- Sep- 2022].
+
 import os
 os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "/Users/ariannajafiyamchelo/Desktop/cc-a1-task2-362308-054849c295bb.json"
 
 app = Flask(__name__)
 
 
+# Code sourced and adapted from:
+
+# [3] M. Berlyant, "Get sum of max per user", Stack Overflow, 2022. [Online]. Available:
+# https://stackoverflow.com/questions/53286810/get-sum-of-max-per-user#53286904. [Accessed: 14- Sep- 2022].
+
+# [4] notnoop, "SQL - How to find the highest number in a column?", Stack Overflow, 2022. [Online]. Available:
+# https://stackoverflow.com/questions/1547125/sql-how-to-find-the-highest-number-in-a-column. [Accessed: 14- Sep-
+# 2022].
+
+# [5] "Aggregate functions  |  BigQuery  |  Google Cloud", Google Cloud,
+# 2022. [Online]. Available: https://cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions. [
+# Accessed: 14- Sep- 2022].
+
+# [6] S. Geron, "How do I fix the error "select list expression [...] references which is neither grouped nor
+# aggregated" in BigQuery?", Stack Overflow, 2022. [Online]. Available:
+# https://stackoverflow.com/questions/67195989/how-do-i-fix-the-error-select-list-expression-references-which-is
+# -neither. [Accessed: 14- Sep- 2022].
+
+# [7] "BigQuery API Client Libraries  |  Google Cloud", Google Cloud, 2022. [Online]. Available:
+# https://cloud.google.com/bigquery/docs/reference/libraries#linux-or-macos. [Accessed: 14- Sep- 2022].
+
 @app.route('/')
 def root():
-
     client = bigquery.Client()
 
     query = """
-        SELECT * FROM cc-a1-task2-362308.task2_dataset.country_classification LIMIT 10
+    SELECT
+  time_ref,
+  MAX(trade_value) AS trade_value
+FROM (
+  SELECT
+    time_ref,
+    SUM(value) AS `trade_value`
+  FROM
+    `cc-a1-task2-362308.task2_dataset.gsquarterlySeptember20`
+  WHERE
+    account = "Exports"
+    OR account = "Imports"
+  GROUP BY
+    time_ref)
+GROUP BY
+  time_ref
+ORDER BY
+  trade_value DESC
+LIMIT
+  10
     """
 
     query_job = client.query(query)
 
-    return render_template('index.html', result=query_job)
+    return render_template('index.html', rows=query_job, i=0)
+
+
+@app.route('/task22')
+def task22():
+    return render_template('task22.html')
+
+
+@app.route('/task23')
+def task23():
+    return render_template('task23.html')
 
 
 if __name__ == '__main__':

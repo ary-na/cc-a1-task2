@@ -1,13 +1,43 @@
+<!--
+
+# Code sourced and adapted from:
+# [1] C. Macrae and Rupert, "Nested For Loop in Jinja2", Stack Overflow, 2022. [Online]. Available:
+# https://stackoverflow.com/questions/34584426/nested-for-loop-in-jinja2#43479868. [Accessed: 14- Sep- 2022].
+
+-->
+
 {% extends "base.html" %}
 {% block title %}CC - A1 - Task2{% endblock %}
 {% block content %}
 
-    <div>
-        <h1>Datastore and Firebase Auth Example</h1>
+    <div class="d-flex flex-column border rounded w-75">
+        <div class="p-xl-5">
+            <h1>Task 2 - 1</h1>
+            <p>
+                <small class="text-muted">Top 10 time slots with the highest trade value</small>
+            </p>
+        </div>
 
-        <h2>Last 10 visits</h2>
-        {% for row in result %}
-            <p>{{ row }}</p>
-        {% endfor %}
+        <div class="row px-xl-5 pb-xl-5">
+            <div class="col">
+                <table class="table">
+                    <thead class="text-muted">
+                    <tr>
+                        <th scope="col">Time Ref</th>
+                        <th scope="col">Trade Value</th>
+                    </tr>
+                    </thead>
+                    <tbody class="align-baseline">
+                    {% for row in rows %}
+                        <tr>
+                            {% for column in row %}
+                                <td>{{ column }}</td>
+                            {% endfor %}
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
 {% endblock %}
