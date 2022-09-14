@@ -18,3 +18,9 @@ For more information visit [Academic Integrity at RMIT](https://www.rmit.edu.au/
 [6] S. Geron, "How do I fix the error "select list expression [...] references which is neither grouped nor aggregated" in BigQuery?", Stack Overflow, 2022. [Online]. Available: https://stackoverflow.com/questions/67195989/how-do-i-fix-the-error-select-list-expression-references-which-is-neither. [Accessed: 14- Sep- 2022].
 
 [7] "BigQuery API Client Libraries  |  Google Cloud", Google Cloud, 2022. [Online]. Available: https://cloud.google.com/bigquery/docs/reference/libraries#linux-or-macos. [Accessed: 14- Sep- 2022].
+
+[8] A. Diwan, "Perform SUM and SUBTRACTION on the basis of a condition in a single MySQL query?", Tutorialspoint.com, 2022. [Online]. Available: https://www.tutorialspoint.com/perform-sum-and-subtraction-on-the-basis-of-a-condition-in-a-single-mysql-query. [Accessed: 14- Sep- 2022].
+
+[9] "Mathematical functions  |  BigQuery  |  Google Cloud", Google Cloud, 2022. [Online]. Available: https://cloud.google.com/bigquery/docs/reference/standard-sql/mathematical_functions. [Accessed: 14- Sep- 2022].
+
+[10] Jacobm001 and Z. Abideen, "How to Perform Subtraction in SQL query based on some conditions?", Stack Overflow, 2022. [Online]. Available: https://stackoverflow.com/questions/46996265/how-to-perform-subtraction-in-sql-query-based-on-some-conditions. [Accessed: 14- Sep- 2022].
