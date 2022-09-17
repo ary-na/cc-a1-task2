@@ -24,3 +24,5 @@ For more information visit [Academic Integrity at RMIT](https://www.rmit.edu.au/
 [9] "Mathematical functions  |  BigQuery  |  Google Cloud", Google Cloud, 2022. [Online]. Available: https://cloud.google.com/bigquery/docs/reference/standard-sql/mathematical_functions. [Accessed: 14- Sep- 2022].
 
 [10] Jacobm001 and Z. Abideen, "How to Perform Subtraction in SQL query based on some conditions?", Stack Overflow, 2022. [Online]. Available: https://stackoverflow.com/questions/46996265/how-to-perform-subtraction-in-sql-query-based-on-some-conditions. [Accessed: 14- Sep- 2022].
+
+[11] K. Wenzel, “How to use the in operator with a subquery,” Essential SQL, 11-Mar-2022. [Online]. Available: https://www.essentialsql.com/in-operator-with-a-subquery/. [Accessed: 17-Sep-2022]. 
