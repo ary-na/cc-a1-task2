@@ -134,12 +134,90 @@ def task22():
     query_job = client.query(query)
     return render_template('task22.html', rows=query_job)
 
+# Code sourced and adapted from:
+
+# [11] K. Wenzel, “How to use the in operator with a subquery,” Essential SQL,
+# 11-Mar-2022. [Online]. Available: https://www.essentialsql.com/in-operator-with-a-subquery/. [Accessed: 17-Sep-2022].
 
 @app.route('/task23')
 def task23():
     client = bigquery.Client()
     query = """
-
+            SELECT
+              service_label,
+              SUM(CASE
+                  WHEN account = 'Exports' THEN value
+                  WHEN account = 'Imports' THEN -value
+              END
+                ) AS trade_surplus_value,
+            FROM
+              `cc-a1-task2-362308.task2_dataset.services_classification` se
+            JOIN
+              `task2_dataset.gsquarterlySeptember20` gs
+            ON
+              gs.code = se.code
+            WHERE
+              time_ref IN (
+              SELECT
+                time_ref
+              FROM (
+                SELECT
+                  time_ref,
+                  MAX(trade_value) AS trade_value
+                FROM (
+                  SELECT
+                    time_ref,
+                    SUM(value) AS `trade_value`
+                  FROM
+                    `cc-a1-task2-362308.task2_dataset.gsquarterlySeptember20`
+                  WHERE
+                    account = "Exports"
+                    OR account = "Imports"
+                  GROUP BY
+                    time_ref)
+                GROUP BY
+                  time_ref
+                ORDER BY
+                  trade_value DESC
+                LIMIT
+                  10 ))
+              AND product_type IN (
+              SELECT
+                product_type
+              FROM (
+                SELECT
+                  country_label,
+                  product_type,
+                  SUM(CASE
+                      WHEN account = 'Imports' THEN value
+                      WHEN account = 'Exports' THEN -value
+                  END
+                    ) AS trade_deficit_value,
+                  status
+                FROM
+                  `task2_dataset.country_classification` co
+                INNER JOIN
+                  `task2_dataset.gsquarterlySeptember20` gs
+                ON
+                  co.country_code = gs.country_code
+                WHERE
+                  time_ref >= 201400
+                  AND time_ref <= 201600
+                  AND status = "F"
+                GROUP BY
+                  country_label,
+                  product_type,
+                  status
+                ORDER BY
+                  trade_deficit_value DESC
+                LIMIT
+                  50 ))
+            GROUP BY
+              service_label
+            ORDER BY
+              trade_surplus_value DESC
+            LIMIT
+              30            
     """
     query_job = client.query(query)
     return render_template('task23.html', rows=query_job)

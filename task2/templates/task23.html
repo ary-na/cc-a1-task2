@@ -4,9 +4,9 @@
 
     <div class="d-flex flex-column border rounded w-75">
         <div class="p-xl-5">
-            <h1>Task 2 - 3</h1>
+            <h1>Task2 - 3</h1>
             <p>
-                <small class="text-muted"></small>
+                <small class="text-muted">Top 30 services with the highest total trade surplus value in the top 10 time slots of Query Result 1 and the top 50 countries of Query Result 2</small>
             </p>
         </div>
 
@@ -15,18 +15,18 @@
                 <table class="table">
                     <thead class="text-muted">
                     <tr>
-                        <th scope="col"></th>
-                        <th scope="col"></th>
+                        <th scope="col">Service Label</th>
+                        <th scope="col">Trade Surplus Value</th>
                     </tr>
                     </thead>
                     <tbody class="align-baseline">
-
+                    {% for row in rows %}
                         <tr>
-
-                                <td></td>
-
+                            {% for column in row %}
+                                <td>{{ column }}</td>
+                            {% endfor %}
                         </tr>
-
+                    {% endfor %}
                     </tbody>
                 </table>
             </div>
