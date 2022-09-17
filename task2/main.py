@@ -25,9 +25,9 @@ from google.cloud import bigquery
 # Server Fault, 2022. [Online]. Available: https://serverfault.com/questions/848580/how-to-use-google-application
 # -credentials-with-gcloud-on-a-server. [Accessed: 14- Sep- 2022].
 
-import os
-
-os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "/Users/ariannajafiyamchelo/Desktop/cc-a1-task2-362308-054849c295bb.json"
+# import os
+#
+# os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "/Users/ariannajafiyamchelo/Desktop/cc-a1-task2-362308-054849c295bb.json"
 
 app = Flask(__name__)
 
